@@ -1,0 +1,127 @@
+/*----------------------------------------------------------------------------------*/
+/* * abarca todos los elementos del html en si */
+*{ 
+    box-sizing: border-box;
+    /*box-sizing: border-box; le dice al navegador que, 
+    al calcular el ancho (width) y alto (height) de un elemento, 
+    incluya en esas medidas tanto el padding como el border.*/
+    margin: 0;
+    /*margin crea espacio externo alrededor de un elemento, 
+    separándolo de otros elementos o bordes.*/
+    padding: 0;
+    /*padding es el espacio interno que hay entre el contenido de un elemento 
+    (como texto o imágenes) y el borde que lo rodea. Sirve para dar aire dentro 
+    del elemento, evitando que el contenido quede muy pegado al borde 
+    Por ejemplo, si pones padding: 10px;, el contenido se alejará 10 píxeles de 
+    cada lado respecto al borde del elemento.*/
+
+    /*Al ponerlos a 0, dejas el elemento sin separación exterior 
+    ni interior, útil para “resetear” estilos predeterminados del 
+    navegador y partir de una base limpia.*/
+}
+
+/*Este bloque CSS actúa como un “reseteo global”: selecciona absolutamente 
+todos los elementos del documento (*) y, antes de aplicar cualquier otro 
+estilo, les quita por completo los márgenes y paddings predeterminados y les 
+asigna box-sizing: border-box, de modo que cualquier ancho o alto que establezcas 
+ya incluye el borde y el relleno. Con ello partes de un lienzo limpio y consistente 
+entre navegadores y facilitas el cálculo preciso de tamaños y la 
+construcción de tus layouts.*/
+/*----------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------*/
+html{
+    height: 100%;
+    /*En CSS, height se refiere a la dimensión vertical (Y): cuánto mide
+    un elemento “de arriba a abajo”. Al poner height: 100%, el elemento 
+    intenta expandirse verticalmente hasta ocupar todo el alto de 
+    su contenedor padre*/
+}
+/*html { height: 100%; } le indica al navegador que el elemento raíz (<html>) debe ocupar el 100 % 
+de la altura de la ventana (viewport). Así:
+Permite que los elementos hijos que usen porcentajes en height—por ejemplo, body { height: 100%; } 
+o contenedores flex/grid—puedan calcularse correctamente tomando como referencia la altura 
+completa de la página. Es útil para crear diseños que necesiten cubrir toda la pantalla, 
+como fondos a pantalla completa, barras laterales que abarquen todo el alto, o secciones 
+centradas verticalmente. En síntesis: garantiza que la etiqueta <html> mida toda la altura visible,
+sirviendo de base para que sus descendientes puedan usar alturas relativas fiables.*/
+/*----------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------*/
+body{
+    min-height: 100%;
+    /*min-height establece la altura mínima que debe tener un elemento; si el 
+    contenido es menor, el elemento tendrá al menos esa altura, pero si el 
+    contenido es mayor, el elemento crecerá para ajustarse, garantizando así 
+    que nunca quede más pequeño de lo indicado.*/
+    text-align: center;
+}
+/*body { min-height: 100%; text-align: center; } garantiza que todo el elemento <body> mida al 
+menos el 100 % de la altura de la ventana (para que siempre cubra toda la pantalla, incluso con 
+poco contenido) y centra horizontalmente el texto y los elementos en línea que contenga.*/
+/*----------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------*/
+.grid-container{
+    display: grid;
+    /*display: grid; activa el sistema de rejilla (grid layout) en ese contenedor.*/
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer";
+    /*grid-template-areas define las áreas de la cuadrícula en filas, aquí una columna con 
+    tres filas, cada una con un nombre de área:
+    primera fila → "header"
+    segunda fila → "main"
+    tercera fila → "footer"*/
+}
+/*Este código convierte .grid-container en un contenedor con diseño de cuadrícula (grid) que divide 
+su espacio en tres filas verticales llamadas "header", "main" y "footer". Cada fila representa un 
+área específica donde se pueden colocar elementos hijos asignándoles esas áreas, lo que permite 
+organizar el contenido de forma clara y estructurada en secciones separadas dentro del 
+mismo contenedor.*/
+/*----------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------*/
+.header{
+    grid-area: header;
+    /*grid-area: header; Le dice al navegador que este elemento debe colocarse en el 
+    sector de la rejilla (CSS Grid) identificado como “header”. Ese nombre proviene 
+    del patrón que definiste con grid-template-areas, donde reservaste una 
+    fila superior para el encabezado.*/
+    background-color: cornflowerblue;
+}
+/*----------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------*/
+.main{
+    grid-area: main;
+    /*grid-area: main; Le dice al navegador que este elemento debe colocarse en el 
+    sector de la rejilla (CSS Grid) identificado como “main”. Ese nombre proviene 
+    del patrón que definiste con grid-template-areas, donde reservaste una 
+    fila superior para el encabezado.*/
+    background-color: lightgreen;
+}
+/*----------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------*/
+.footer{
+    grid-area: footer;
+    /*grid-area: footer; Le dice al navegador que este elemento debe colocarse en el 
+    sector de la rejilla (CSS Grid) identificado como “footer”. Ese nombre proviene 
+    del patrón que definiste con grid-template-areas, donde reservaste una 
+    fila superior para el encabezado.*/
+    background-color: darkgrey;
+}
+/*----------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------*/
+@media (min-width: 100px) {
+    .grid-container{
+        grid-template: 
+        "header" 100px
+        "main"  auto
+        "footer" 100px;
+    }
+}
+/*----------------------------------------------------------------------------------*/
