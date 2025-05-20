@@ -7,7 +7,7 @@
 //  2. .value = Una propiedad que se usa para obtener o establecer el contenido de un elemento de formulario (como un <input> o <textarea>).
 //  Ejemplo: let nombre = document.getElementById("nombre").value;
 //  Aquí estás diciendo:
-//  “Busca el elemento con id="nombre" y dame su valor”.
+//  “Busca el elemento con id="nombre" y dame su valor y almacenalo en la variable nombre”.
 //  Si un input tiene esto en HTML:
 //  <input id="nombre" value="Ana">
 //  Entonces .value será "Ana".
