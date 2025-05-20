@@ -6,12 +6,22 @@
     <title>CSS EXPLICADO</title>
     <link rel="stylesheet" href="assets/css/grid.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <script src="assets/js/formScript.js"></script>
 </head>
 <body class="grid-container">
     <header class="header">header</header>
     <main class="main">main
         <div class="main-div">
-            asd
+            FORMULARIO
+            <form>
+                <input type="text" name="nombre" id="nombre" placeholder="ingrese su nombre">
+                <br>
+                <p id="errorNombre"></p>
+                <input type="text" name="apellido" id="apellido" placeholder="ingrese su apellido">
+                <br>
+                <p id="errorApellido"></p>
+                <button type="button" onclick="validar()">Registrar</button>
+            </form>
         </div>
     </main>
     <footer class="footer">footer</footer>
