@@ -54,8 +54,6 @@ function validar(){
         elementoApellido.value = ""
         // Limpian los campos del formulario después de agregar la persona.
         // Es decir, el usuario verá los campos vacíos para ingresar otra persona.
-        console.log(personas)
-        // Muestra por consola el array completo personas.
         cargarTablaDatosPersonas()
         // Llama a una función que actualiza una tabla en pantalla para mostrar la lista de personas ingresadas.
     }
@@ -135,7 +133,7 @@ function cargarTablaDatosPersonas(){
         return "<tr><td>"+p.nombre+"</td>"+
                 "<td>"+p.apellido+"</td>"+
                 "<td><button onclick='eliminar("+index+")'>Eliminar</button>"+
-                "<button onclick='cargarDatos("+index+")'>Actualizar</button>"+
+                "<button onclick='actualizarFormulario("+index+")'>Actualizar</button>"+
                 "</td></tr>"
                 //  .map() recorre cada persona (p) y retorna una cadena HTML (<tr>...</tr>) por cada una.
                 //  Así que el resultado es un nuevo array de strings HTML, uno por persona:
@@ -145,8 +143,6 @@ function cargarTablaDatosPersonas(){
                 //  ]
                 // Este array de filas HTML se guarda en la variable personasMap.
     })
-    console.log("Convirtiendo...")
-    console.log(personasMap)
     let personasStr = personasMap.join("")
     //  .join("") convierte el array personasMap (que contiene varios strings con filas HTML) en un solo string sin separadores.
     //   Esto es necesario porque .innerHTML solo acepta un string plano, no un array.
@@ -197,10 +193,46 @@ function eliminar(indice){
         // 1: "<tr><td>persona2</td><td>persona2</td><td><button onclick='eliminar(1)'>Eliminar</button> - aqui coinciden = no se guardara "se elimina"
         // coincidico el 1: con el onclick='eliminar(1)' por lo que no se retornan en el nuevo array
     })
-    console.log("filtrando")
-    console.log(personas)
     cargarTablaDatosPersonas()
     // Llama a una función que redibuja la tabla HTML en pantalla.
     // Esto es fundamental, porque si no lo haces, los datos en pantalla no se actualizan aunque el array haya cambiado.
     // Esta función lee el array personas y crea de nuevo todas las filas <tr> de la tabla.
+}
+
+
+//<button onclick='actualizarFormulario("+index+")'>Actualizar</button>
+function actualizarFormulario(indice){
+    let elementoNombre = document.getElementById("nombre1")
+    let elementoApellido = document.getElementById("apellido1")
+    let persona = personas.filter((p,index)=>{
+        if (index == indice){
+            return p
+        }
+    })
+    elementoNombre.value = persona[0].nombre
+    elementoApellido.value = persona[0].apellido
+    let btnActualizar = document.getElementById("btnActualizar")
+    btnActualizar.value = indice
+}
+
+
+function actualizar(){
+    let elementoNombre = document.getElementById("nombre1")
+    let valorIngresadoNombre = elementoNombre.value
+    let elementoApellido = document.getElementById("apellido1")
+    let valorIngresadoApellido = elementoApellido.value
+    let btnActualizar = document.getElementById("btnActualizar")
+    let indice = btnActualizar.value
+    personas = personas.map((p,index)=>{
+        if (index == indice){
+            return{
+                nombre : valorIngresadoNombre,
+                apellido : valorIngresadoApellido
+            }
+        }
+        else {
+            return p
+        }
+    })
+    cargarTablaDatosPersonas()
 }
