@@ -200,39 +200,81 @@ function eliminar(indice){
 }
 
 
-//<button onclick='actualizarFormulario("+index+")'>Actualizar</button>
+// <button onclick='actualizarFormulario("+index+")'>Actualizar</button>
+// Esta función se activa al hacer clic en el botón "Actualizar" de una fila de la tabla.
 function actualizarFormulario(indice){
-    let elementoNombre = document.getElementById("nombre1")
-    let elementoApellido = document.getElementById("apellido1")
+    // indice: es la posición (índice) de la persona dentro del arreglo personas[] que se desea editar.
+
+    // Busca dos elementos del HTML (probablemente <input> del formulario para editar/actualizar) con los ID
+    let elementoNombreParaActualizar = document.getElementById("nombre1")
+    // nombre1: campo donde se editará el nombre.
+    let elementoApellidoParaActualizar = document.getElementById("apellido1")
+    // apellido1: campo donde se editará el apellido.
+    // Estos inputs están pensados exclusivamente para editar datos existentes (no para registrar nuevos).
+
     let persona = personas.filter((p,index)=>{
+    // Se usa .filter() para buscar la persona ubicada en el índice recibido.
         if (index == indice){
+        // Devuelve un array con solo un elemento: la persona que coincide con ese índice.
             return p
+            // Resultado: persona[0] será el objeto a editar, con sus propiedades nombre y apellido.
         }
     })
-    elementoNombre.value = persona[0].nombre
-    elementoApellido.value = persona[0].apellido
+    
+    // Asigna al campo de nombre (nombre1) el valor del nombre actual de esa persona.
+    elementoNombreParaActualizar.value = persona[0].nombre
+    // Hace lo mismo con el apellido.
+    elementoApellidoParaActualizar.value = persona[0].apellido
+    // Efecto visual: los campos del formulario se llenan automáticamente con los datos que se van a editar.
+
+    // Busca el botón (u otro elemento) con ID btnActualizar en el HTML.
     let btnActualizar = document.getElementById("btnActualizar")
+    // Almacena la variable dentro de su valor (value) el índice de la persona a actualizar.
     btnActualizar.value = indice
+    // Esto sirve para que la otra función (actualizar()) sepa a quién debe modificar más adelante.
 }
 
 
+// Esta función se activa cuando se presiona el botón "Actualizar" o "Guardar cambios" del formulario de edición.
 function actualizar(){
-    let elementoNombre = document.getElementById("nombre1")
-    let valorIngresadoNombre = elementoNombre.value
-    let elementoApellido = document.getElementById("apellido1")
-    let valorIngresadoApellido = elementoApellido.value
+
+    // Busca el campo de entrada con ID nombre1.
+    let elementoNombreActualizado = document.getElementById("nombre1")
+    // Toma el valor que el usuario editó (nuevo nombre) y lo guarda en valorIngresadoNombre.
+    let valorIngresadoNombreActualizado = elementoNombreActualizado.value
+
+    // Igual que antes, pero con el campo de apellido (apellido1).
+    let elementoApellidoActualizado = document.getElementById("apellido1")
+    // Guarda el nuevo apellido ingresado en valorIngresadoApellido.
+    let valorIngresadoApellidoActualizado = elementoApellidoActualizado.value
+
+    // Recupera el valor que se había guardado previamente en el botón oculto btnActualizar.
     let btnActualizar = document.getElementById("btnActualizar")
+    // Ese valor representa el índice (posición) de la persona a actualizar en el arreglo personas[].
     let indice = btnActualizar.value
+
     personas = personas.map((p,index)=>{
+        // .map() recorre todo el arreglo personas[].
+        // Para cada persona (representada por p), se compara su posición index con el 
+        // indice que se va a actualizar.
         if (index == indice){
+            //Si coinciden:
+            //Se reemplaza ese objeto por uno nuevo que contiene el nombre y apellido editados.
             return{
-                nombre : valorIngresadoNombre,
-                apellido : valorIngresadoApellido
+                nombre : valorIngresadoNombreActualizado,
+                apellido : valorIngresadoApellidoActualizado
             }
         }
         else {
+            // Si no coinciden:
+            // Se devuelve el objeto original sin cambios.
             return p
         }
+        // Resultado: se crea un nuevo array personas con todos 
+        // los mismos elementos, excepto uno que ha sido reemplazado con los datos actualizados.
     })
+    // Después de modificar el arreglo personas, se vuelve a generar la tabla en HTML usando los nuevos datos.
+    // Esta llamada asegura que la vista esté actualizada con los cambios realizados.
     cargarTablaDatosPersonas()
+
 }
